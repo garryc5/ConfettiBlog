@@ -28,6 +28,18 @@ class App extends Component {
 		})
 	}
 
+	handleAddPost = (post) =>
+	{
+		this.setState({
+			posts: [{...post}, ...this.state.posts]
+		});
+	}
+	handleSummit = (event) =>
+	{
+		event.preventDefault()
+		this.props.handleAddPost([...this.state])
+	}
+
 	// this is our render which handles our view
 	render() {
 		// compose components down here and later
@@ -46,7 +58,9 @@ class App extends Component {
 			<div className="App container">
 				<Nav content="NAV" />
 				{!this.state.isShowing ? (
-					<BlogForm handleToggle={this.handleShowForm} />
+					<BlogForm 
+					handleAddPost = {this.handleAddPost}
+					handleToggle={this.handleShowForm} />
 				) : (
 					<button onClick={this.handleShowForm}>Add Post</button>
 				)}

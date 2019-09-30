@@ -19,25 +19,35 @@ class BlogForm extends Component {
             
 			<form className="blog-form">
 				<h1>{this.state.title}</h1>
+				<div>
+				<label>title:  </label>
 				<input
 					type="text"
 					name="title"
 					onChange={this.handleOnChange}
 					value={this.state.title}
 				/>
+				</div>
+				<div>
+					<label>user name:</label>
 				<input
 					type="text"
 					name="user"
 					onChange={this.handleOnChange}
 					value={this.state.user}
 				/>
+				</div>
+				<div>
+					<label>Comtent: </label>
 				<input
-					type="text"
+					type="textarea"
 					name="content"
 					onChange={this.handleOnChange}
 					value={this.state.content}
 				/>
-                <button onClick={this.props.handleToggle} >close</button>
+				</div>
+				<input type="sumbit" value="add" onClick={this.props.handleAddPost}>Add</input>
+                <button onClick={this.props.handleToggle} className="button-primary">close</button>
 			</form>
 
 		)
@@ -47,5 +57,6 @@ class BlogForm extends Component {
 export default BlogForm
 
 BlogForm.propTypes = {
-    handleToggle : PropTypes.func
+	handleToggle : PropTypes.func,
+	handleAddPost : PropTypes.func
 }
