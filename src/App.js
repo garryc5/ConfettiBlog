@@ -3,9 +3,7 @@ import './App.css'
 import Nav from './Nav'
 import Footer from './Footer'
 import BlogForm from './BlogForm'
-// import Post from './Post/index'
 class App extends Component {
-	//this is our state object
 	state = {
 		isShowing: true,
 		posts: [
@@ -21,7 +19,6 @@ class App extends Component {
 			}
 		]
 	}
-	// we will define all event logic here
 	handleShowForm = event => {
 		this.setState({
 			isShowing: !this.state.isShowing
@@ -29,21 +26,13 @@ class App extends Component {
 	}
 
 	handleAddPost = ({ title, user, content}) => {
+		console.log('app.js line 33', post)
 		this.setState({
-			posts: [{title, user, content }, ...this.state.posts] 
-		})}
-	handleDelete = (i) =>
-	{
-		let newState = this.state.posts.filter(i=> this.state.posts[i]!==i)
-		this.setState(
-			{
-				posts : newState
-			})
+			posts: [{title, user, content }, ...this.state.posts] // we spread the object and the state
+		})
 	}
-	// this is our render which handles our view
+
 	render() {
-		// compose components down here and later
-		// TODO : extract these to seperate components
 		const composedPosts = this.state.posts.map((item, index) => {
 			return (
 				<li key={index} className="post">
@@ -59,9 +48,9 @@ class App extends Component {
 			 <h1>Confetti Blog</h1>
 				<Nav content="NAV" />
 				{!this.state.isShowing ? (
-					<BlogForm 
-					handleAddPost = {this.handleAddPost}
-					handleToggle={this.handleShowForm} 
+					<BlogForm
+						handleAddPost={this.handleAddPost}
+						handleToggle={this.handleShowForm}
 					/>
 				) : (
 					<button onClick={this.handleShowForm}>Add Post</button>
