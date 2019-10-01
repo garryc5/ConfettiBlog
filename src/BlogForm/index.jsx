@@ -12,6 +12,11 @@ class BlogForm extends Component {
            [event.target.name]: event.target.value
        });
    };
+
+	handleSubmit = event => {
+		event.preventDefault()
+		this.props.handleAddPost({...this.state})
+	}
    render() {
        return (
            <form className="blog-form">
@@ -42,8 +47,8 @@ class BlogForm extends Component {
                    type="text"
                    name="content"
                />
-               <button class="button-primary" onClick={this.props.handleAddPost}>Add</button>
                <button class="button-primary" onClick={this.props.handleToggle}>Close</button>
+               <input type="submit"/>
            </form>
        );
    }

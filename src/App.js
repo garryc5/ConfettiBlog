@@ -3,7 +3,7 @@ import './App.css'
 import Nav from './Nav'
 import Footer from './Footer'
 import BlogForm from './BlogForm'
-
+// import Post from './Post/index'
 class App extends Component {
 	//this is our state object
 	state = {
@@ -28,34 +28,35 @@ class App extends Component {
 		})
 	}
 
-	handleAddPost = (post) =>
-	{
+	handleAddPost = ({ title, user, content}) => {
 		this.setState({
-			posts: [{...post}, ...this.state.posts]
-		});
-	}
-	handleSummit = (event) =>
+			posts: [{title, user, content }, ...this.state.posts] 
+		})}
+	handleDelete = (i) =>
 	{
-		event.preventDefault()
-		this.props.handleAddPost([...this.state])
+		let newState = this.state.posts.filter(i=> this.state.posts[i]!==i)
+		this.setState(
+			{
+				posts : newState
+			})
 	}
-
 	// this is our render which handles our view
 	render() {
 		// compose components down here and later
 		// TODO : extract these to seperate components
-		const title = <h1>Confetti Blog</h1>
 		const composedPosts = this.state.posts.map((item, index) => {
 			return (
 				<li key={index} className="post">
 					<h3 className="postTitles">{item.title}</h3>
 					<p>{item.content}</p>
 					<h6>{item.user}</h6>
+					<button onClick={()=>this.handleDelete(index)}>Delete</button>
 				</li>
 			)
 		})
 		return (
 			<div className="App container">
+			 <h1>Confetti Blog</h1>
 				<Nav content="NAV" />
 				{!this.state.isShowing ? (
 					<BlogForm 
