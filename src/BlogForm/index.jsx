@@ -15,7 +15,7 @@ class BlogForm extends Component {
 
 	handleSubmit = event => {
 		event.preventDefault()
-		this.props.handleAddPost({...this.state})
+        this.props.handleAddPost({...this.state})
 	}
    render() {
        return (
