@@ -3,6 +3,8 @@ import './App.css'
 import Nav from './Nav'
 import Footer from './Footer'
 import BlogForm from './BlogForm'
+import Post from './Post/Post'
+
 class App extends Component {
 	state = {
 		isShowing: true,
@@ -25,22 +27,36 @@ class App extends Component {
 		})
 	}
 
-	handleAddPost = ({ title, user, content}) => {
-		console.log('app.js line 33', post)
+	//update state here and pass this method down to another component
+	handleAddPost = ({ title, user, content }) => {
+		console.log('app.js line 33', { title, user, content })
 		this.setState({
-			posts: [{title, user, content }, ...this.state.posts] // we spread the object and the state
+			posts: [{ title, user, content }, ...this.state.posts] // we spread the object and the state
+		})
+	}
+
+	handleDelete = id => {
+		// first we copy the state and modify it
+		let newState = this.state.posts.filter(
+			item => this.state.posts[id] !== item
+		)
+		// set the state
+		this.setState({
+			posts: newState
 		})
 	}
 
 	render() {
 		const composedPosts = this.state.posts.map((item, index) => {
 			return (
-				<li key={index} className="post">
-					<h3 className="postTitles">{item.title}</h3>
-					<p>{item.content}</p>
-					<h6>{item.user}</h6>
-					<button onClick={()=>this.handleDelete(index)}>Delete</button>
-				</li>
+				<Post
+					key={index}
+					title={item.title}
+					user={item.user}
+					content={item.content}
+					handleDelete={this.handleDelete}
+					id={index}
+				/>
 			)
 		})
 		return (
