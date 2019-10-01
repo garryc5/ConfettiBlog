@@ -60,7 +60,8 @@ class App extends Component {
 				{!this.state.isShowing ? (
 					<BlogForm 
 					handleAddPost = {this.handleAddPost}
-					handleToggle={this.handleShowForm} />
+					handleToggle={this.handleShowForm} 
+					/>
 				) : (
 					<button onClick={this.handleShowForm}>Add Post</button>
 				)}
